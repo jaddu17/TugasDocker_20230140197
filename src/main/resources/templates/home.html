@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home - Student Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            color: #111827;
+        }
+        .header {
+            background-color: #f9fafb;
+            padding: 16px 24px;
+            font-weight: 600;
+            font-size: 18px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 32px auto;
+            background-color: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            min-height: 500px;
+        }
+        .welcome-text {
+            color: #6b7280;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+        .btn-add {
+            display: inline-flex;
+            align-items: center;
+            background-color: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            margin-bottom: 32px;
+        }
+        .btn-add:hover {
+            background-color: #1d4ed8;
+        }
+        h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #374151;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th {
+            background-color: #2563eb;
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+            color: #4b5563;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background-color: #f9fafb;
+        }
+        .empty {
+            text-align: center;
+            padding: 32px;
+            color: #9ca3af;
+            font-style: italic;
+        }
+        .logout-link {
+            display: inline-block;
+            margin-top: 32px;
+            color: #ef4444;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .logout-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <span>MY Website 20230140197</span>
+    <a href="/logout" style="font-size: 13px; color: #6b7280; text-decoration: none;">Logout</a>
+</div>
+
+<div class="container">
+    <h3 style="font-weight: 700; margin-top: 0; margin-bottom: 24px;">Halaman Home</h3>
+    <p class="welcome-text">Selamat datang di dashboard aplikasi Anda!</p>
+    
+    <a href="/form" class="btn-add">+ Tambah Data Mahasiswa</a>
+
+    <h4>Data Mahasiswa Terdaftar</h4>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 80px;">No</th>
+                <th>Nama Lengkap</th>
+                <th>NIM</th>
+                <th>Jenis Kelamin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student, iter : ${students}">
+                <td th:text="${iter.count}">1</td>
+                <td th:text="${student.nama}" style="font-weight: 500; color: #111827;">Nama</td>
+                <td th:text="${student.nim}">NIM</td>
+                <td th:text="${student.jk}">JK</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(students)}">
+                <td colspan="4" class="empty">Belum ada data mahasiswa yang tersimpan.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
